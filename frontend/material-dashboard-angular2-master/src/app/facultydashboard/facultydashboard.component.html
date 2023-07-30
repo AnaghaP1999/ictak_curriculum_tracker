@@ -1,0 +1,194 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+
+
+
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <div class="row">
+                            <div class="col-4">
+                                <h4 class="card-title mt-0">ICTAK CURRICULUM TRACKER</h4>
+                                <p class="card-category">Requirements</p>
+                            </div>
+                            <div class="col-4"></div>
+                            <div class="col-1"></div>
+                            <div class="col-3">
+
+                                <div class="input-group no-border">
+                                    <!-- <input type="text" value="" class="form-control" 
+                                    [(ngModel)]="filterTerm" (input)="applyFilter()"
+                                    placeholder="Search..."> -->
+                                    <input type="text"  class="form-control" 
+                                    [(ngModel)]="filterTerm" (input)="applyFilter()"
+                                     placeholder="Enter your filter term" />
+        
+                                    <button mat-raised-button type="submit" class="btn btn-white  btn-just-icon">
+                                        <i class="material-icons">search</i>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Requirement Name
+                                    </th>
+                                    <th>
+                                        Training Area
+                                    </th>
+                                    <th>Approved / Pending</th>
+                                    <th>Response</th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of filtereddata; let i = index" >
+                                        <td>
+                                      {{i+1}}
+                                        </td>
+                                        <td>
+                                    {{item.name}}
+                                        </td>
+                                        <td>
+                                            {{ item.area }}
+                                        </td>
+                                       
+
+                                            <td class="status"><span class="active" *ngIf="item.approved == 1">Approved</span>
+                                                <span class="waiting" *ngIf="item.approved == 0">Pending</span>
+                                              </td>
+                                           
+
+                                      
+                                        <td>
+                                            <button class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#response">Response</button>
+                                        </td>
+                                        <td>
+                                            <button mat-raised-button type="button" matTooltip="View form"
+                                                [matTooltipPosition]="'above'"
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon">
+
+                                                <i class="material-icons" (click)="viewDetails(item._id)"
+                                                    data-bs-toggle="modal" data-bs-target="#viewmodal">visibility</i>
+                                                <!-- <i class="bi-eye-fill" (click)="viewDetails(item._id)" 
+                                    data-bs-toggle="modal" data-bs-target="#viewmodal"></i> -->
+
+                                            </button>
+                                            <button mat-raised-button type="button" matTooltip="Edit  form"
+                                                [matTooltipPosition]="'above'" 
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                <i class="material-icons"  >edit</i>
+                                            </button>
+                                                           
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+  <!-- The Modal -->
+  <div class="modal" id="response">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Response</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body ">
+          <label for="comments">Comments:</label><br>
+          <textarea id="comments" name="comments" placeholder="comments" rows="6" cols="90">
+          </textarea> <br><br>
+
+          <button class="btn btn-primary">File Upload</button>
+
+        </div>
+
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal" id="viewmodal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Requirement Details
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-4">
+                        <p class="mb-3"><strong> Requirement Name:</strong>{{names}}</p>
+                        <p class="mb-3"><strong>Training Area:</strong>{{areas}}</p>
+                    </div>
+                    <div class="col-4">
+
+                        <p class="mb-3"><strong>Institute:</strong>{{institutes}}</p>
+
+                        <p class="mb-3"><strong>Requirements:</strong>{{req}}</p>
+
+
+                    </div>
+                    <div class="col-4">
+                        <p class="mb-3"><strong>Hours:</strong>{{hou}}</p>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+  

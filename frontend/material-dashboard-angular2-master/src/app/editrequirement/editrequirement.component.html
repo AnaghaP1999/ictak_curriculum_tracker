@@ -1,0 +1,68 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+      
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <form #add="ngForm" (ngSubmit)="updateRequirement()">
+                        <div class="mb-3 mt-3">
+                          <label for="name" class="form-label">Name:</label>
+                          <input type="text" class="form-control" id="name" [(ngModel)]="requirementData.name"
+                            placeholder="Enter Name of Requirement" name="name">
+                        </div>
+                        <div class="mb-3">
+                          <label for="area" class="form-label">Area Where training is required</label>
+                          <select class="form-select" id="area" placeholder="Enter Area where training is required"
+                            [(ngModel)]="requirementData.area" name="area">
+                            <option value="">Choose an Option</option>
+                            <option>FSD</option>
+                            <option>ML-AI</option>
+                            <option>DSA</option>
+                            <option>RPA</option>
+                            <option>ST</option>
+                            <option>CSA</option>
+                          </select>
+                        </div>
+                        <div class="mb-3 mt-3">
+                          <label for="institute" class="form-label">Institute/Corprate</label>
+                          <input type="text" class="form-control" id="institute" placeholder="Enter Institute/Corprate"
+                            [(ngModel)]="requirementData.institute" name="institute">
+                        </div>
+      
+                        <div class="mb-3">
+                          <label for="requirement" class="form-label">Category of requirement</label>
+                          <select class="form-select" id="requirements" placeholder="category of requirement"
+                            name="requirements" [(ngModel)]="requirementData.requirements">
+                            <option value="">Choose an Option</option>
+                            <option>Retail</option>
+                            <option>Academic</option>
+                            <option>Corporate</option>
+                            <option>Govt</option>
+                          </select>
+                        </div>
+      
+                        <div class="mb-3 mt-3">
+                          <label for="hours" class="form-label">No: of hours</label>
+                          <input type="text" class="form-control" id="hours" [(ngModel)]="requirementData.hours"
+                            placeholder="No: of hours of training" name="hours">
+                        </div>
+                        <button type="submit" class="btn btn-primary ">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-danger" >Cancel</button>
+                      </form>
+                    </div>
+      
+                    <!-- Modal footer -->
+      
+                  </div>
+                </div>
+              </div>
+
+            </div>
+     </div>
+</div>
+
