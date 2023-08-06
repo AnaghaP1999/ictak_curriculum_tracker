@@ -187,8 +187,9 @@
 
 
                                             <span class="active" *ngIf="item.approved == 1">Approved</span>
-                                            <span class="waiting" *ngIf="item.approved == 0"
+                                            <span class="waiting" *ngIf="(item.approved == 0) && (item.curriculum != '')"
                                                 (click)="updateToApproved(item._id)">Pending</span>
+                                            <span class="waiting" *ngIf="(item.approved == 0) && (item.curriculum == '')">Waiting</span>
 
                                         </td>
                                         <td>

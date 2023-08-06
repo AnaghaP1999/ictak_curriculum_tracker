@@ -72,7 +72,8 @@
                                        
 
                                             <td class="status"><span class="active" *ngIf="item.approved == 1">Approved</span>
-                                                <span class="waiting" *ngIf="item.approved == 0">Pending</span>
+                                                <span class="waiting" *ngIf="(item.approved == 0) && (item.curriculum != '')">Pending</span>
+                                                <span class="waiting" *ngIf="(item.approved == 0) && (item.curriculum == '')">Waiting</span>
                                               </td>
                                            
 
