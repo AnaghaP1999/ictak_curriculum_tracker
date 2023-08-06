@@ -44,7 +44,7 @@ export class FacultydashboardComponent implements OnInit {
     this.reqservice.getRequirements().subscribe((data=>{
       this.items=data;
       this.applyFilter()
-    
+      this.fetchPdfUrls();
     }))
 
     // this.reqservice.getRequirements().subscribe((data=>{
@@ -90,6 +90,36 @@ export class FacultydashboardComponent implements OnInit {
       data.hours.toLowerCase().includes(term.toLowerCase()) 
   
     );
+  }
+
+  fetchPdfUrls(): void {
+    this.reqservice.getRequirements().subscribe((data=>{
+      this.items=data;
+      this.items.forEach((item) => {
+        if (item.approved == 1) {
+          this.reqservice.getPdfUrl(item._id).subscribe((pdfUrl) => {
+            item.curriculum = pdfUrl; // Assuming 'curriculum' holds the PDF filename
+            console.log('kjh',item.curriculum);
+            
+          });
+        }
+      });
+    }))
+    
+  }
+
+  downloadPdf(itemId: string) {
+    this.reqservice.getPdfUrl(itemId).subscribe((response: any) => {
+      const pdfUrl = response;
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      
+      link.target = '_blank';
+      link.setAttribute('download', `curriculum-${itemId}.pdf`); // Set the "download" attribute
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); 
+    });
   }
 
 }

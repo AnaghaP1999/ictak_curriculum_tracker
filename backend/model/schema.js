@@ -24,6 +24,14 @@ const Schema = mongoose.Schema({
         type:Number,
       
     },
+    comments:{                                                                  
+        type:String,
+      
+    },
+    curriculum:{                                                                  
+        type:String,
+      
+    }
   
 });
 
