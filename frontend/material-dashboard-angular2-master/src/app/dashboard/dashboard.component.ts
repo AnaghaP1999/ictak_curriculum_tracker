@@ -40,7 +40,9 @@ area:'',
 institute:'',
 requirements:'',
 hours:'',
-approved:'0'
+approved:'0',
+comments: '',
+curriculum: ''
 
 }
   

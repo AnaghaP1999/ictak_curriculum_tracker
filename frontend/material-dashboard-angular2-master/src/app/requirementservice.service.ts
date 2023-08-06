@@ -69,4 +69,12 @@ export class RequirementserviceService {
     return this.http.get('http://localhost:3000/api/searchfilter');
 
   }
+
+  saveRequirement(formData: FormData) {
+    return this.http.put(`http://localhost:3000/api/save-requirement/${formData.get('_id')}`, formData);
+  }
+
+  getPdfUrl(itemId: string): Observable<string> {
+    return this.http.get(`http://localhost:3000/api/getPdfUrl/${itemId}`, { responseType: 'text' });
+  }
 }
