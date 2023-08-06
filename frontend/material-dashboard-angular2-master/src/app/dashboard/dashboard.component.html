@@ -134,7 +134,7 @@
                                     placeholder="Search..."> -->
                                     <input type="text"  class="form-control" 
                                     [(ngModel)]="filterTerm" (input)="applyFilter()"
-                                     placeholder="Enter your filter term" />
+                                     placeholder="Enter your filter term" style="color:white;" />
         
                                     <button mat-raised-button type="submit" class="btn btn-white  btn-just-icon">
                                         <i class="material-icons">search</i>
@@ -154,11 +154,15 @@
                                         ID
                                     </th>
                                     <th>
-                                        Requirement Name
+                                        Name
                                     </th>
+                                  
                                     <th>
                                         Training Area
                                     </th>
+                                    <th>Institute/Corprate</th>
+                                    <th>Category</th>
+                                    <th>Hours</th>
                                     <th>Approved / Pending</th>
 
                                     <th>
@@ -176,6 +180,9 @@
                                         <td>
                                             {{ item.area }}
                                         </td>
+                                        <td>{{item.institute}}</td>
+                                        <td>{{item.requirements}}</td>
+                                        <td>{{item.hours}}</td>
                                         <td class="status">
 
 

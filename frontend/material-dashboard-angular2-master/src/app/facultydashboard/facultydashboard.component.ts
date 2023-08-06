@@ -85,7 +85,9 @@ export class FacultydashboardComponent implements OnInit {
     return (
       data.name.toLowerCase().includes(term.toLowerCase()) ||
       data.area.toLowerCase().includes(term.toLowerCase()) ||
-      data._id.toLowerCase().includes(term.toLowerCase()) 
+      data.institute.toLowerCase().includes(term.toLowerCase()) ||
+      data.requirements.toLowerCase().includes(term.toLowerCase()) ||
+      data.hours.toLowerCase().includes(term.toLowerCase()) 
   
     );
   }
