@@ -24,7 +24,7 @@ router.get('/requirementlist', (req, res) => {
 
 //   get a single requirement details - Admin
   router.get('/get-requirement/:id', (req, res) => {
-    const id = req.params.id;console.log('idnode', req.params);
+    const id = req.params.id;
   
     requirementData.findById(id)
       .then((data) => {
@@ -146,55 +146,19 @@ router.put('/approve-curriculum/:id', async (req, res) => {
       });
   });
 
-// Configure multer for handling file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.pdf');
-  },
-});
-const upload = multer({ storage });
-
-// Route to save the requirement
-router.put('/save-requirement/:id', upload.single('curriculum'), (req, res) => {
+// Add Response - Faculty
+router.put('/save-requirement/:id', (req, res) => {
   const id = req.params.id;
-  const { comments } = req.body;
-  const curriculum = req.file.filename;
-  console.log('curriculum', curriculum);
-  const updatedData = { comments, curriculum };
-  requirementData.findByIdAndUpdate(id, updatedData, { new: true })
+  const responseData = req.body;
+
+  requirementData.findByIdAndUpdate(id, responseData, { new: true })
     .then((updated) => {
       res.json(updated);
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).json({ error: 'Error updating requirement' });
+      res.status(500).json({ error: 'Error updating response' });
     });
 });
-
-router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-  router.get('/getPdfUrl/:id', (req, res) => {
-    const itemId = req.params.id;
-    requirementData.findById(itemId)
-      .then((item) => {
-        if (!item) {
-          return res.status(404).json({ error: 'Item not found' });
-        }
-  
-        if (item.approved == 1 && item.curriculum) {
-          const pdfUrl = `/uploads/${item.curriculum}`;
-          return res.json( pdfUrl );
-        }
-  
-        return res.status(404).json({ error: 'PDF not available for this item' });
-      })
-      .catch((error) => {
-        console.error('Error retrieving item:', error);
-        res.status(500).send('Error retrieving item');
-      });
-  });
 
 module.exports = router

@@ -11,8 +11,6 @@ import { RequirementserviceService } from 'app/requirementservice.service';
 })
 export class AddresponseComponent implements OnInit {
 
-  requirement: { comments: string, curriculum: File | null } = { comments: '', curriculum: null };
-  selectedId: any;
   requirementData: any = {};
   private id: string | null = null;
 
@@ -22,7 +20,7 @@ export class AddresponseComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.id = params.get('id');
-      
+      this.id = decodeURIComponent(this.id);
       this.getRequirementDetails(this.id);
 
       if (!this.id) {
@@ -34,8 +32,8 @@ export class AddresponseComponent implements OnInit {
   getRequirementDetails(id: string) {
     this.reqservice.getDataById(id).subscribe(
       (response) => {
-        this.requirement = response; 
-        console.log('this.requirementData',  this.requirement);
+        this.requirementData = response; 
+        console.log('this.requirementData',  this.requirementData);
         
       },
       (error) => {
@@ -44,34 +42,11 @@ export class AddresponseComponent implements OnInit {
     );
   }
 
-  submitForm() {
-    if (this.id) {
-      // Prepare the requirementData object with comments and file properties
-      const formData = new FormData();
-      formData.append('_id', this.id);
-      formData.append('comments', this.requirement.comments);
-      formData.append('curriculum', this.requirement.curriculum || new File([], 'dummy.txt'));
-
-      this.reqservice.saveRequirement(formData).subscribe(
-      
-        (response) => {
-          console.log('Requirement saved successfully:', response);
-          // Reset the form after successful submission
-          this.requirement.comments = '';
-          this.requirement.curriculum = null;
-          this.router.navigate(['/facultydashboard']);
-        },
-        (error) => {
-          console.error('Error while saving requirement:', error);
-        }
-      );
-    } else {
-      console.error('No ID found in route parameters.');
-    }
+  // add a response - Faculty
+  addResponse() {
+    this.reqservice.addResponse(this.requirementData).subscribe(() => {
+      this.router.navigate(['/facultydashboard']);
+    });
   }
-
-  onFileChange(event: any) {
-    this.requirement.curriculum = event.target.files[0];
-  }
-
+  
 }

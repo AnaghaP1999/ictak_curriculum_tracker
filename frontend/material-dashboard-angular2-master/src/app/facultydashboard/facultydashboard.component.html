@@ -100,10 +100,9 @@
                                                 class="btn btn-primary btn-link btn-sm btn-just-icon">
                                                 <i class="material-icons"  [routerLink]="['/add-response', item._id]">edit</i>
                                             </button>
-                                            <button mat-raised-button type="button" matTooltip="Download PDF" *ngIf="(item.approved == 1)"
-          [matTooltipPosition]="'above'" (click)="downloadPdf(item._id)">
-    <i class="bi bi-download"></i>
-  </button>
+                                            <a mat-raised-button href="{{item.curriculum}}" target="_blank" matTooltip="Download PDF" *ngIf="(item.approved == 1)" [matTooltipPosition]="'above'" >
+                                                <i class="bi bi-download"></i>
+                                            </a>
                                         </td>
                                     </tr>
 
