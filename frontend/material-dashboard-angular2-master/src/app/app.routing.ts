@@ -7,6 +7,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { AuthGuard } from './auth.guard';
+import { UserroleGuard } from './userrole.guard';
+import { AddresponseComponent } from './addresponse/addresponse.component';
 
 const routes: Routes =[
   {
@@ -23,7 +26,7 @@ const routes: Routes =[
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
     }]
   },
-
+  {path:'add-response/:id',component:AddresponseComponent, canActivate: [AuthGuard, UserroleGuard]},
 ];
 
 @NgModule({
