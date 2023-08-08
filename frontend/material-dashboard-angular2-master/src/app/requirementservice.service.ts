@@ -9,9 +9,9 @@ import { Observable, catchError } from 'rxjs';
 })
 export class RequirementserviceService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router:Router) { }
 
-
+  private isLoggedIn = false;
 
   
    //  get all requirements API - Admin
@@ -72,13 +72,15 @@ export class RequirementserviceService {
   }
 
   // add response API - Faculty
-  addResponse(requirements: { _id: string; comments: string; curriculum: string; }): Observable<any> {
+  addResponse(requirements: { _id: string; comments: string; curriculum: string; user: string }): Observable<any> {
+    requirements.user = localStorage.getItem('user');
     return this.http.put(`http://localhost:3000/api/save-requirement/${requirements._id}`, requirements);
   }
 
  
 
   loginmethod(user:any){
+    this.isLoggedIn = true;
     return this.http.post('http://localhost:3000/api/adminlogin',user)
    }
 
@@ -87,5 +89,17 @@ export class RequirementserviceService {
   }
   signupmethod(user:any):Observable<any>{
     return this.http.post('http://localhost:3000/api/signup', user);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('user');
+    this.router.navigate(['/login'])
+    this.isLoggedIn = false;
+  }
+
+  loggedIn():boolean{
+    return !!localStorage.getItem('token');
   }
 }

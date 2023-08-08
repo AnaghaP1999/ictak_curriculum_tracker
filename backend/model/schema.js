@@ -32,15 +32,10 @@ const Schema = mongoose.Schema({
         type:String,
       
     },
-    
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    facultyname:{
-        type:String,                                                         
-     }
+    user:{
+        type:String,
+    }
 
-  
-  
 });
 
 const documentData = mongoose.model('requirement',Schema);

@@ -1,19 +1,32 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const path = require('path');
+// const multer = require('multer');
+// const path = require('path');
 
 
 
 const jwt=require('jsonwebtoken')
 const requirementData=require("../model/schema")
+const userData=require("../model/userschema")
 
 router.use(express.json());
 router.use(express.urlencoded({extended:true}));
 
+function verifytoken(req, res, next) {
+  try {
+    if (!req.headers.authorization) throw 'Unauthorized';
+    let token = req.headers.authorization.split(' ')[1];
+    if (!token) throw 'Unauthorized';
+    let payload = jwt.verify(token, 'secretKey');
+    if (!payload) throw 'Unauthorized';
+    next();
+  } catch (error) {
+    res.status(401).send('Unauthorized');
+  }
+}
 
 // Get All requirement list - Admin
-router.get('/requirementlist', (req, res) => {
+router.get('/requirementlist',verifytoken, (req, res) => {
     requirementData.find()
       .then((Requirements) => {
         res.json(Requirements);
@@ -25,7 +38,7 @@ router.get('/requirementlist', (req, res) => {
   });
 
 //   get a single requirement details - Admin
-  router.get('/get-requirement/:id', (req, res) => {
+  router.get('/get-requirement/:id',verifytoken, (req, res) => {
     const id = req.params.id;
   
     requirementData.findById(id)
@@ -43,10 +56,8 @@ router.get('/requirementlist', (req, res) => {
 
   
 //   Add requirements - Admin
-router.post('/addrequirement',async (req,res)=>{                              
+router.post('/addrequirement',verifytoken, async (req,res)=>{                              
     try{
-        //console.log(req.headers.authorization)
-        console.log(req.body);
         const item = req.body;                                               
         const newdata = await requirementData(item);                               
         newdata.save();                                
@@ -60,7 +71,7 @@ router.post('/addrequirement',async (req,res)=>{
 
 
 // Update requirement details - Admin
-router.put('/update-requirement/:id', (req, res) => {
+router.put('/update-requirement/:id',verifytoken, (req, res) => {
     const id = req.params.id;
     const updatedData = req.body;
   
@@ -74,10 +85,9 @@ router.put('/update-requirement/:id', (req, res) => {
       });
   });
 
-router.get('/viewdata/:_id',async (req,res)=>{
+router.get('/viewdata/:_id',verifytoken, async (req,res)=>{
   try {
       let id = req.params._id;
-      console.log(id)
       let data = await requirementData.findById(id);
       res.json({data:data,status:200}).status(201);
   } catch (error) {
@@ -87,7 +97,7 @@ router.get('/viewdata/:_id',async (req,res)=>{
 
 
 //  Approve Curriculum - Admin
-router.put('/approve-curriculum/:id', async (req, res) => {
+router.put('/approve-curriculum/:id',verifytoken, async (req, res) => {
   const { id } = req.params;
   const { approved } = req.body;
 
@@ -102,7 +112,7 @@ router.put('/approve-curriculum/:id', async (req, res) => {
 
 
 //   delete a requirement - Admin
-  router.delete('/delete-requirement/:id', (req, res) => {
+  router.delete('/delete-requirement/:id',verifytoken, (req, res) => {
     const id = req.params.id;
   
     requirementData.findByIdAndRemove(id)
@@ -149,7 +159,7 @@ router.put('/approve-curriculum/:id', async (req, res) => {
   });
 
 // Add Response - Faculty
-router.put('/save-requirement/:id', (req, res) => {
+router.put('/save-requirement/:id',verifytoken, (req, res) => {
   const id = req.params.id;
   const responseData = req.body;
 
@@ -167,39 +177,37 @@ router.put('/save-requirement/:id', (req, res) => {
 
 
   router.post('/adminlogin', (req, res) => {
-    const { username, password } = req.body;
-  
-    const token = jwt.sign({ username: req.body.username, password: req.body.password }, 'secret-key');
-  
-    console.log(req.body.username);
-    console.log(req.body.password);
-  
-    // Send the token in the response
-    if (username === 'admin@gmail.com' && password === 'admin@123') {
-      res.status(200).send({ message: 'Admin logged in Successful', token: token })
-      console.log('Admin logged in Successful')
-    } 
-    
-  
-  
-  
+    try {      
+        var username = req.body.username;
+        var password = req.body.password;
+      
+        // Send the token in the response
+        if (username === 'admin@gmail.com' && password === 'admin@123') {
+        const token = jwt.sign({ username, password }, 'secretKey');
+
+          res.status(200).send({ message: 'Admin logged in Successful', token: token, role:'admin' })
+          console.log('Admin logged in Successful')
+        } else {
+          res.status(400).send({message:'Unauthorized'});
+        }
+      } catch (error) {
+        res.status(404).send({message:'Not found'});
+    }
   });
 
 
   router.post('/facultylogin', async (req, res) => {
     try {
       const { username, password } = req.body;
-      const faculty = await requirementData.findOne({ username, password });
+      const faculty = await userData.findOne({ username, password });
       if (faculty) {
-        res.status(200).json({ message: 'Faculty login successful.' });
-        console.log('Faculty login successful')
+        const token = jwt.sign({ username, password }, 'secretKey');
+        res.status(200).json({ message: 'Faculty login successful.', token: token, role:'user', user:username });
       } else {
-        res.status(401).json({ error: 'Invalid credentials.' });
-        console.log('Invalid Credentials')
+        res.status(400).json({ error: 'Invalid credentials.' });
       }
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
-      console.log('Internal Server Error')
+      res.status(404).json({ error: 'Internal Server Error' });
     }
   
   });
@@ -207,7 +215,7 @@ router.put('/save-requirement/:id', (req, res) => {
   router.post('/signup', async (req, res) => {
     try {
       const { facultyname, username, password } = req.body;
-      const faculty = new requirementData({ facultyname, username, password });
+      const faculty = new userData({ facultyname, username, password });
       await faculty.save();
       res.status(201).json({ message: 'Faculty signup successful.' });
       console.log('Faculty signup successful.')

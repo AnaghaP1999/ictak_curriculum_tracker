@@ -40,10 +40,11 @@ export class FacultydashboardComponent implements OnInit {
   constructor(private reqservice:RequirementserviceService) { }
 
   ngOnInit(): void {
-
+    
     this.reqservice.getRequirements().subscribe((data=>{
       this.items=data;
-      this.applyFilter()
+      let userData = localStorage.getItem('user');
+      this.applyFilter();
     }))
 
     // this.reqservice.getRequirements().subscribe((data=>{
@@ -90,10 +91,4 @@ export class FacultydashboardComponent implements OnInit {
   
     );
   }
-
-
-
-  
-
-
 }

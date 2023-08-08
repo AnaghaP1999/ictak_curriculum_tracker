@@ -42,7 +42,8 @@ requirements:'',
 hours:'',
 approved:'0',
 comments: '',
-curriculum: ''
+curriculum: '',
+user:''
 
 }
   

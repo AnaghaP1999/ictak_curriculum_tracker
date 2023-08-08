@@ -10,6 +10,9 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { EditrequirementComponent } from 'app/editrequirement/editrequirement.component';
 import { FacultydashboardComponent } from 'app/facultydashboard/facultydashboard.component';
+import { AuthGuard } from 'app/auth.guard';
+import { RoleGuard } from 'app/role.guard';
+import { UserroleGuard } from 'app/userrole.guard';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -54,7 +57,7 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
+    { path: 'dashboard',      component: DashboardComponent, canActivate: [AuthGuard, RoleGuard] },
     // { path: 'user-profile',   component: UserProfileComponent },
     // { path: 'table-list',     component: TableListComponent },
     // { path: 'typography',     component: TypographyComponent },
@@ -62,6 +65,6 @@ export const AdminLayoutRoutes: Routes = [
     // { path: 'maps',           component: MapsComponent },
     // { path: 'notifications',  component: NotificationsComponent },
     // { path: 'upgrade',        component: UpgradeComponent },
-    { path: 'edit-requirement/:id',        component: EditrequirementComponent },
-    {path:'facultydashboard',component:FacultydashboardComponent}
+    { path: 'edit-requirement/:id',        component: EditrequirementComponent, canActivate: [AuthGuard, RoleGuard] },
+    {path:'facultydashboard',component:FacultydashboardComponent, canActivate: [AuthGuard, UserroleGuard]}
 ];
