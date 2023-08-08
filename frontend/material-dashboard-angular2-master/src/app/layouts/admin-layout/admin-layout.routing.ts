@@ -13,6 +13,8 @@ import { FacultydashboardComponent } from 'app/facultydashboard/facultydashboard
 import { AuthGuard } from 'app/auth.guard';
 import { RoleGuard } from 'app/role.guard';
 import { UserroleGuard } from 'app/userrole.guard';
+import { AddresponseComponent } from 'app/addresponse/addresponse.component';
+
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -66,5 +68,6 @@ export const AdminLayoutRoutes: Routes = [
     // { path: 'notifications',  component: NotificationsComponent },
     // { path: 'upgrade',        component: UpgradeComponent },
     { path: 'edit-requirement/:id',        component: EditrequirementComponent, canActivate: [AuthGuard, RoleGuard] },
-    {path:'facultydashboard',component:FacultydashboardComponent, canActivate: [AuthGuard, UserroleGuard]}
+    {path:'facultydashboard',component:FacultydashboardComponent, canActivate: [AuthGuard, UserroleGuard]},
+    {path:'add-response/:id',component:AddresponseComponent},
 ];

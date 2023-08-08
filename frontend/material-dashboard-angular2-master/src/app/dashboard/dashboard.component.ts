@@ -227,7 +227,7 @@ deleteRequirement(id: string) {
         this.reqservice.deleteRequirement(this.requirements._id).subscribe(
           () => {
             console.log('Requirement deleted successfully.');
-            this.router.navigate(['']);
+            // this.router.navigate(['']);
             window.location.reload();
           },
           (error) => {
