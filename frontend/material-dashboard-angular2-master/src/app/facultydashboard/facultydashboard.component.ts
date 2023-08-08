@@ -122,4 +122,5 @@ export class FacultydashboardComponent implements OnInit {
     });
   }
 
+
 }

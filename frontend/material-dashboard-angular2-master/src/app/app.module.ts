@@ -8,6 +8,8 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AddresponseComponent } from './addresponse/addresponse.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,8 @@ import { AddresponseComponent } from './addresponse/addresponse.component';
     AppComponent,
     AdminLayoutComponent,
     AddresponseComponent,
+    LoginComponent,
+    SignupComponent,
    
 
   ],

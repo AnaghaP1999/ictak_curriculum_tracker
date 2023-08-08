@@ -77,4 +77,15 @@ export class RequirementserviceService {
   getPdfUrl(itemId: string): Observable<string> {
     return this.http.get(`http://localhost:3000/api/getPdfUrl/${itemId}`, { responseType: 'text' });
   }
+
+  loginmethod(user:any){
+    return this.http.post('http://localhost:3000/api/adminlogin',user)
+   }
+
+   facultyloginmethod(user:any):Observable<any> {
+      return this.http.post('http://localhost:3000/api/facultylogin', user);
+  }
+  signupmethod(user:any):Observable<any>{
+    return this.http.post('http://localhost:3000/api/signup', user);
+  }
 }

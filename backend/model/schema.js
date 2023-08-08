@@ -31,7 +31,15 @@ const Schema = mongoose.Schema({
     curriculum:{                                                                  
         type:String,
       
-    }
+    },
+    
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    facultyname:{
+        type:String,                                                         
+     }
+
+  
   
 });
 
