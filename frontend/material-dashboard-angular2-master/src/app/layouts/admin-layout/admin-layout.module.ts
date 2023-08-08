@@ -19,6 +19,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { EditrequirementComponent } from 'app/editrequirement/editrequirement.component';
 import { FacultydashboardComponent } from 'app/facultydashboard/facultydashboard.component';
+import { AddresponseComponent } from 'app/addresponse/addresponse.component';
+
 
 @NgModule({
   imports: [
@@ -43,7 +45,8 @@ import { FacultydashboardComponent } from 'app/facultydashboard/facultydashboard
     NotificationsComponent,
     UpgradeComponent,
     EditrequirementComponent,
-    FacultydashboardComponent
+    FacultydashboardComponent,
+    AddresponseComponent
     
   ]
 })

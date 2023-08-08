@@ -10,6 +10,8 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { EditrequirementComponent } from 'app/editrequirement/editrequirement.component';
 import { FacultydashboardComponent } from 'app/facultydashboard/facultydashboard.component';
+import { AddresponseComponent } from 'app/addresponse/addresponse.component';
+
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -63,5 +65,6 @@ export const AdminLayoutRoutes: Routes = [
     // { path: 'notifications',  component: NotificationsComponent },
     // { path: 'upgrade',        component: UpgradeComponent },
     { path: 'edit-requirement/:id',        component: EditrequirementComponent },
-    {path:'facultydashboard',component:FacultydashboardComponent}
+    {path:'facultydashboard',component:FacultydashboardComponent},
+    {path:'add-response/:id',component:AddresponseComponent},
 ];
