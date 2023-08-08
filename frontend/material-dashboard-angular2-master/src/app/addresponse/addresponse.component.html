@@ -9,20 +9,18 @@
       
                     <!-- Modal body -->
                     <div class="modal-body">
-                      <form #add="ngForm" (submit)="submitForm()" enctype="multipart/form-data">
+                      <form #add="ngForm" (ngSubmit)="addResponse()" enctype="multipart/form-data">
                         <div class="mb-3 mt-3">
                           <label for="name" class="form-label">Comment</label>
-                          <textarea class="form-control" id="comments" [(ngModel)]="requirement.comments"
+                          <textarea class="form-control" id="comments" [(ngModel)]="requirementData.comments"
                             placeholder="Add comments here" name="comments"></textarea>
                         </div>
                         <div class="mb-3">
                           <label for="area" class="form-label">Upload Curriculum</label>
-                          <input type="file" class="form-control" id="curriculum" name="curriculum" (change)="onFileChange($event)" />
-                          <!-- <iframe src="/backend/requirement.curriculum" class="form-control" id="curriculum" name="curriculum" ></iframe> -->
-                        
+                          <input type="text" class="form-control" id="curriculum" name="curriculum" [(ngModel)]="requirementData.curriculum" placeholder="Add the url"/>                        
                         </div>
                        
-                        <button  type="button" class="btn btn-primary" (click)="submitForm()">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button  type="submit" class="btn btn-primary">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="submit" class="btn btn-danger" >Cancel</button>
                       </form>
                     </div>

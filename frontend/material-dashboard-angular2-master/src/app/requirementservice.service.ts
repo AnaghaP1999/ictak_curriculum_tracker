@@ -65,18 +65,18 @@ export class RequirementserviceService {
     );
   }
 
+  //   search filter
   searchmethod(){
     return this.http.get('http://localhost:3000/api/searchfilter');
 
   }
 
-  saveRequirement(formData: FormData) {
-    return this.http.put(`http://localhost:3000/api/save-requirement/${formData.get('_id')}`, formData);
+  // add response API - Faculty
+  addResponse(requirements: { _id: string; comments: string; curriculum: string; }): Observable<any> {
+    return this.http.put(`http://localhost:3000/api/save-requirement/${requirements._id}`, requirements);
   }
 
-  getPdfUrl(itemId: string): Observable<string> {
-    return this.http.get(`http://localhost:3000/api/getPdfUrl/${itemId}`, { responseType: 'text' });
-  }
+ 
 
   loginmethod(user:any){
     return this.http.post('http://localhost:3000/api/adminlogin',user)
