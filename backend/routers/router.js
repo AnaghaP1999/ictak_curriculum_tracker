@@ -4,6 +4,8 @@ const multer = require('multer');
 const path = require('path');
 
 
+
+const jwt=require('jsonwebtoken')
 const requirementData=require("../model/schema")
 
 router.use(express.json());
@@ -160,5 +162,61 @@ router.put('/save-requirement/:id', (req, res) => {
       res.status(500).json({ error: 'Error updating response' });
     });
 });
+
+
+
+
+  router.post('/adminlogin', (req, res) => {
+    const { username, password } = req.body;
+  
+    const token = jwt.sign({ username: req.body.username, password: req.body.password }, 'secret-key');
+  
+    console.log(req.body.username);
+    console.log(req.body.password);
+  
+    // Send the token in the response
+    if (username === 'admin@gmail.com' && password === 'admin@123') {
+      res.status(200).send({ message: 'Admin logged in Successful', token: token })
+      console.log('Admin logged in Successful')
+    } 
+    
+  
+  
+  
+  });
+
+
+  router.post('/facultylogin', async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const faculty = await requirementData.findOne({ username, password });
+      if (faculty) {
+        res.status(200).json({ message: 'Faculty login successful.' });
+        console.log('Faculty login successful')
+      } else {
+        res.status(401).json({ error: 'Invalid credentials.' });
+        console.log('Invalid Credentials')
+      }
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+      console.log('Internal Server Error')
+    }
+  
+  });
+
+  router.post('/signup', async (req, res) => {
+    try {
+      const { facultyname, username, password } = req.body;
+      const faculty = new requirementData({ facultyname, username, password });
+      await faculty.save();
+      res.status(201).json({ message: 'Faculty signup successful.' });
+      console.log('Faculty signup successful.')
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+      console.log('Internal Server Error')
+    }
+  });
+
+
 
 module.exports = router

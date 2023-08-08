@@ -76,4 +76,16 @@ export class RequirementserviceService {
     return this.http.put(`http://localhost:3000/api/save-requirement/${requirements._id}`, requirements);
   }
 
+ 
+
+  loginmethod(user:any){
+    return this.http.post('http://localhost:3000/api/adminlogin',user)
+   }
+
+   facultyloginmethod(user:any):Observable<any> {
+      return this.http.post('http://localhost:3000/api/facultylogin', user);
+  }
+  signupmethod(user:any):Observable<any>{
+    return this.http.post('http://localhost:3000/api/signup', user);
+  }
 }
