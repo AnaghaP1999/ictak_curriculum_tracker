@@ -22,6 +22,8 @@ export class SignupComponent implements OnInit {
   signupdisplay(){
     this.service.signupmethod(this.signupform).subscribe(res=>{
       alert("FacultyAccount Successfully Registered")
+      localStorage.setItem('token', res.token);
+
         this.route.navigate(['/login'])
       },(error)=>{
         alert("Not Successfully Registered")
