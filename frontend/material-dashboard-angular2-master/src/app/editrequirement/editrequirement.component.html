@@ -51,8 +51,19 @@
                           <input type="text" class="form-control" id="hours" [(ngModel)]="requirementData.hours"
                             placeholder="No: of hours of training" name="hours">
                         </div>
+
+                           <div class="mb-3 mt-3">
+                          <label for="name" class="form-label">Comment</label>
+                          <textarea class="form-control" id="comments" [(ngModel)]="requirementData.comments"
+                            placeholder="Add comments here" name="comments"></textarea>
+                        </div>
+                        <div class="mb-3 mt-3">
+                          <label for="area" class="form-label">Upload Curriculum</label>
+                          <input type="text" class="form-control" id="curriculum" name="curriculum"
+                              [(ngModel)]="requirementData.curriculum" placeholder="Add the url"/>                        
+                        </div>
                         <button type="submit" class="btn btn-primary ">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="submit" class="btn btn-danger" >Cancel</button>
+                        <button type="submit" class="btn btn-danger" (click)="cancelfunction()" >Cancel</button>
                       </form>
                     </div>
       
