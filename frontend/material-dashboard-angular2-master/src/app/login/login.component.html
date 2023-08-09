@@ -23,7 +23,7 @@
                                 <input type="email" class="form-control" [(ngModel)]="loginform.username"
                                     #username="ngModel" id="username" placeholder="Enter Email" name="username"
                                     [class.is-invalid]="username.invalid && username.touched"
-                                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                    pattern="^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,}$"
                                      required>
                                 <small class="text-danger" [class.d-none]="username.valid || username.untouched">
                                     Username is required</small>
@@ -34,8 +34,7 @@
                                     placeholder="Enter Password" [(ngModel)]="loginform.password"
                                     #password="ngModel" name="password"
                                     [class.is-invalid]="password.invalid && password.touched"
-                                    pattern
-                                    ="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>])[A-Za-z\d!@#$%^&*()\-_=+{};:,<.>.]{8,}$"
+                                    pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$"
                                      required>
                                 <small class="text-danger"
                                  [class.d-none]="password.valid || password.untouched">Password
