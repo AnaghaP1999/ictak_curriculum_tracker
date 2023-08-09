@@ -18,6 +18,8 @@ export class DashboardComponent implements OnInit {
   institutes:any;
   req:any;
   hou:any;
+   com:any;
+  cur:any;
   
     itemIdInput: any;
     searchForm: FormGroup;
@@ -214,7 +216,9 @@ viewDetails(itemId: any) {
   this.areas=this.viewdetails.data.area;
   this.institutes=this.viewdetails.data.institute;
   this.req=this.viewdetails.data.requirements;
-  this.hou=this.viewdetails.data.hours
+  this.hou=this.viewdetails.data.hours;
+    this.com=this.viewdetails.data.comments;
+  this.cur=this.viewdetails.data.curriculum;
   });
 }
 
@@ -247,7 +251,7 @@ updateToApproved(id: string) {
       if (confirm('Are you sure you want to approve this Curriculum?')) { 
         this.reqservice.updateItemToApproved(this.requirements._id).subscribe(
           () => {
-            this.router.navigate(['']);
+            this.router.navigate(['/dashboard']);
             window.location.reload();
           },
           (error) => {
