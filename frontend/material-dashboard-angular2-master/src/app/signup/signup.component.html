@@ -23,7 +23,7 @@
                                 <input type="text" class="form-control" [(ngModel)]="signupform.facultyname"
                                     #facultyname="ngModel" id="facultyname" placeholder="Enter FacultyName" name="facultyname"
                                     [class.is-invalid]="facultyname.invalid && facultyname.touched"
-                                    pattern="^[A-Za-z]+$" required>
+                                    pattern="^[a-zA-Z]+$" required>
                                 <small class="text-danger" [class.d-none]="facultyname.valid || facultyname.untouched">
                                     Facultyname is required</small>
                             </div>
@@ -32,7 +32,7 @@
                                 <input type="email" class="form-control" [(ngModel)]="signupform.username"
                                     #username="ngModel" id="username" placeholder="Enter Email" name="username"
                                     [class.is-invalid]="username.invalid && username.touched" 
-                                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                                    pattern="^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]{2,}$" required>
                                 <small class="text-danger" [class.d-none]="username.valid || username.untouched">
                                     Username is required</small>
                             </div>
@@ -42,8 +42,7 @@
                                     placeholder="Enter Password" [(ngModel)]="signupform.password"
                                     #password="ngModel" name="password"
                                     [class.is-invalid]="password.invalid && password.touched"
-                                    pattern
-                                    ="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>])[A-Za-z\d!@#$%^&*()\-_=+{};:,<.>.]{8,}$"
+                                    pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$"
                                      required>
                                 <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password
                                     is required</small>
