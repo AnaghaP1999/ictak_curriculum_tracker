@@ -17,6 +17,8 @@ export class FacultydashboardComponent implements OnInit {
   institutes:any;
   req:any;
   hou:any;
+  com:any;
+  cur:any
   
     itemIdInput: any;
     searchForm: FormGroup;
@@ -71,7 +73,9 @@ export class FacultydashboardComponent implements OnInit {
     this.areas=this.viewdetails.data.area;
     this.institutes=this.viewdetails.data.institute;
     this.req=this.viewdetails.data.requirements;
-    this.hou=this.viewdetails.data.hours
+    this.hou=this.viewdetails.data.hours;
+    this.com=this.viewdetails.data.comments
+    this.cur=this.viewdetails.data.curriculum
     });
   }
 
