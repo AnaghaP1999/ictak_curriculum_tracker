@@ -69,5 +69,5 @@ export const AdminLayoutRoutes: Routes = [
     // { path: 'upgrade',        component: UpgradeComponent },
     { path: 'edit-requirement/:id',        component: EditrequirementComponent, canActivate: [AuthGuard, RoleGuard] },
     {path:'facultydashboard',component:FacultydashboardComponent, canActivate: [AuthGuard, UserroleGuard]},
-    {path:'add-response/:id',component:AddresponseComponent},
+    {path:'add-response/:id',component:AddresponseComponent, canActivate: [AuthGuard, UserroleGuard]},
 ];

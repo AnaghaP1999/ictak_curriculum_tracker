@@ -44,7 +44,7 @@ export class EditrequirementComponent implements OnInit {
   // update a requirement - Admin
   updateRequirement() {
     this.reqservice.updateRequirement(this.requirementData).subscribe(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['/dashboard']);
     });
   }
 

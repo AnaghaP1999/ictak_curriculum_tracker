@@ -36,11 +36,13 @@ export class FacultydashboardComponent implements OnInit {
   approved:'0'
   
   }
+
+  loggedInUserEmail: string = '';
     
   constructor(private reqservice:RequirementserviceService) { }
 
   ngOnInit(): void {
-    
+    this.loggedInUserEmail = localStorage.getItem('user');
     this.reqservice.getRequirements().subscribe((data=>{
       this.items=data;
       let userData = localStorage.getItem('user');
@@ -54,6 +56,10 @@ export class FacultydashboardComponent implements OnInit {
     //     console.log(this.items[i])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             )
     //   }
     // }))
+  }
+
+  canEdit(item: any): boolean {
+    return item.user === this.loggedInUserEmail;
   }
 
   viewDetails(itemId: any) {
