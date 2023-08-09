@@ -48,4 +48,9 @@ export class EditrequirementComponent implements OnInit {
     });
   }
 
+    cancelfunction(){
+       this.router.navigate(['/dashboard']);
+
+  }
+
 }
