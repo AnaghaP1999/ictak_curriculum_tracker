@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-mongoose.connect('mongodb+srv://admin:admin123@cluster0.qlazmk7.mongodb.net/Employees?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://Anagahp:Anagha001@cluster0.q3mgyhu.mongodb.net/Curriculum_tracker?retryWrites=true&w=majority')
 
 .then(()=>{
     console.log(`Connection to Database established`);

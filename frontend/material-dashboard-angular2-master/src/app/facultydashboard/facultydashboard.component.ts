@@ -50,25 +50,16 @@ export class FacultydashboardComponent implements OnInit {
       let userData = localStorage.getItem('user');
       this.applyFilter();
     }))
-
-    // this.reqservice.getRequirements().subscribe((data=>{
-    //   this.items=data;
-    //   // console.log(this.items);
-    //   for(let i=0;i<this.items[i].length;i++){
-    //     console.log(this.items[i])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             )
-    //   }
-    // }))
   }
 
   canEdit(item: any): boolean {
     return item.user === this.loggedInUserEmail;
   }
 
+  // Get requirement details by id
   viewDetails(itemId: any) {
     this.reqservice.viewdetailsse(itemId).subscribe(details => {
     this.viewdetails=  details
-    console.log(details);
-    console.log(this.viewdetails.data._id)
     this.names=this.viewdetails.data.name;
     this.areas=this.viewdetails.data.area;
     this.institutes=this.viewdetails.data.institute;
@@ -80,6 +71,7 @@ export class FacultydashboardComponent implements OnInit {
   }
 
 
+  // Search Filter
   applyFilter() {
     if (!this.filterTerm) {
       this.filtereddata = this.items;

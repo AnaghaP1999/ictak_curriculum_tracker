@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
+  // admin autherization
   canActivate() {
     let role = localStorage.getItem('role');
 

@@ -24,15 +24,15 @@ export class RequirementserviceService {
     return this.http.post<any>("http://localhost:3000/api/addrequirement", data);
 
    }
+
+  //  Get requirement details by id
    viewdetailsse(id:any){
     return this.http.get(`http://localhost:3000/api/viewdata/${id}`)
    }
 
-  
 
   //  get requirement by id API - Admin
    getDataById(id: string): Observable<any> {
-    // const encodedId = encodeURIComponent(id);
     return this.http.get<any>(`http://localhost:3000/api/get-requirement/${id}`);
   }
 
@@ -52,18 +52,6 @@ export class RequirementserviceService {
     return this.http.put(`http://localhost:3000/api/approve-curriculum/${id}`, { approved: 1 });
   }
 
-  //   search filter - Admin
-  search(name: string, institution: string, area: string, requirements: string): Observable<any[]> {
-    const queryParams = `?name=${name}&institution=${institution}&area=${area}&requirements=${requirements}`;
-    const searchUrl = `http://localhost:3000/api/search/` + queryParams;
-
-    return this.http.get<any[]>(searchUrl).pipe(
-      catchError((error) => {
-        console.error('Error occurred while fetching search results:', error);
-        return [];
-      })
-    );
-  }
 
   //   search filter
   searchmethod(){
@@ -78,19 +66,23 @@ export class RequirementserviceService {
   }
 
  
-
+// Admin Login
   loginmethod(user:any){
     this.isLoggedIn = true;
     return this.http.post('http://localhost:3000/api/adminlogin',user)
    }
 
+  //  Faculty Login
    facultyloginmethod(user:any):Observable<any> {
       return this.http.post('http://localhost:3000/api/facultylogin', user);
   }
+
+  // signup
   signupmethod(user:any):Observable<any>{
     return this.http.post('http://localhost:3000/api/signup', user);
   }
 
+  // Logout
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
