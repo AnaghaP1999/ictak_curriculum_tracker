@@ -18,11 +18,6 @@ const api=require('./routers/router');
 app.use('/api',api);
 
 
-
-
-
-
-
 app.listen(PORT,()=>{                                                         
         console.log(`Server is running on ${PORT}`);                             
 })

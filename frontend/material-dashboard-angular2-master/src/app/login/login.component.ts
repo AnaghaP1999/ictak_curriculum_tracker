@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
 
+  // Login
   logindisplay() {
 
     if (this.loginform.username == 'admin@gmail.com' && this.loginform.password == 'admin@123') {

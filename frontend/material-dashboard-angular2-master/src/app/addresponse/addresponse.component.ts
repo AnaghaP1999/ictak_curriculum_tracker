@@ -31,12 +31,11 @@ export class AddresponseComponent implements OnInit {
     });
   }
 
+  // to get requirement details by id
   getRequirementDetails(id: string) {
     this.reqservice.getDataById(id).subscribe(
       (response) => {
-        this.requirementData = response; 
-        console.log('this.requirementData',  this.requirementData);
-        
+        this.requirementData = response;        
       },
       (error) => {
         console.error('Error fetching requirement details:', error);

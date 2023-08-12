@@ -206,12 +206,10 @@ file:''
   })
 }
 
-
+// View Requirement details by id
 viewDetails(itemId: any) {
   this.reqservice.viewdetailsse(itemId).subscribe(details => {
   this.viewdetails=  details
-  console.log(details);
-  console.log(this.viewdetails.data._id)
   this.names=this.viewdetails.data.name;
   this.areas=this.viewdetails.data.area;
   this.institutes=this.viewdetails.data.institute;
@@ -231,7 +229,6 @@ deleteRequirement(id: string) {
         this.reqservice.deleteRequirement(this.requirements._id).subscribe(
           () => {
             console.log('Requirement deleted successfully.');
-            // this.router.navigate(['']);
             window.location.reload();
           },
           (error) => {
@@ -265,14 +262,7 @@ updateToApproved(id: string) {
   );
 }
 
-
-// fetchBooks() {
-//   this.reqservice.searchmethod().subscribe((books) => {
-//     this.books = books;
-//     this.applyFilter();
-//   });
-// }
-
+// search filter
 applyFilter() {
   if (!this.filterTerm) {
     this.filtereddata = this.items;

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserroleGuard implements CanActivate {
+  // faculty autherization
   canActivate() {
     let role = localStorage.getItem('role');
 

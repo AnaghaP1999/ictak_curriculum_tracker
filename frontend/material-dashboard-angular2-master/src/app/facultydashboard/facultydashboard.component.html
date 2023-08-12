@@ -91,8 +91,6 @@
 
                                                 <i class="material-icons" (click)="viewDetails(item._id)"
                                                     data-bs-toggle="modal" data-bs-target="#viewmodal">visibility</i>
-                                                <!-- <i class="bi-eye-fill" (click)="viewDetails(item._id)" 
-                                    data-bs-toggle="modal" data-bs-target="#viewmodal"></i> -->
 
                                             </button>
                                             <button mat-raised-button type="button" matTooltip="Edit  form" *ngIf="(item.approved == 0) && (item.curriculum != '') && canEdit(item)"

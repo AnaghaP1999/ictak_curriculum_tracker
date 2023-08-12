@@ -1,10 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// const multer = require('multer');
-// const path = require('path');
-
-
-
 const jwt=require('jsonwebtoken')
 const requirementData=require("../model/schema")
 const userData=require("../model/userschema")
@@ -12,6 +7,7 @@ const userData=require("../model/userschema")
 router.use(express.json());
 router.use(express.urlencoded({extended:true}));
 
+// function to verify token
 function verifytoken(req, res, next) {
   try {
     if (!req.headers.authorization) throw 'Unauthorized';
@@ -62,10 +58,10 @@ router.post('/addrequirement',verifytoken, async (req,res)=>{
         const newdata = await requirementData(item);                               
         newdata.save();                                
         res.status(200).json("Requirement Added");    
-        console.log(` POST data`);                                                                         
+        console.log(` Requirement Added`);                                                                         
     }catch(error){
-        res.status(400).json("Cannot /POST data");                            
-        console.log(`Cannot POST data`);                                      
+        res.status(400).json("Cannot Add data");                            
+        console.log(`Cannot Add data`);                                      
     }
 })
 
@@ -85,6 +81,7 @@ router.put('/update-requirement/:id',verifytoken, (req, res) => {
       });
   });
 
+  // Api to view requirement details
 router.get('/viewdata/:_id',verifytoken, async (req,res)=>{
   try {
       let id = req.params._id;
@@ -132,22 +129,6 @@ router.put('/approve-curriculum/:id',verifytoken, async (req, res) => {
 
 
 //   search filter - Admin
-
-  router.get('/search', (req, res) => {
-    const { name, institution, area, requirements } = req.query;
-    const filters = {};
-    if (name !== undefined && name !== '') filters.name = name;
-    if (institution !== undefined && institution !== '') filters.institution = institution;
-    if (area !== undefined && area !== '') filters.area = area;
-    if (requirements !== undefined && requirements !== '') filters.requirements = requirements;
-    
-    // Fetch data from db based on the filters
-    requirementData.find(filters)
-      .then(result => res.json(result))
-      .catch(err => res.status(500).json({ error: 'Error fetching data.' }));
-  });
-
-
   router.get('/searchfilter', (req, res) => {
     requirementData.find()
       .then((data) => {
@@ -174,8 +155,7 @@ router.put('/save-requirement/:id',verifytoken, (req, res) => {
 });
 
 
-
-
+// Api for Admin Login
   router.post('/adminlogin', (req, res) => {
     try {      
         var username = req.body.username;
@@ -196,6 +176,7 @@ router.put('/save-requirement/:id',verifytoken, (req, res) => {
   });
 
 
+  // Api for Faculty Login
   router.post('/facultylogin', async (req, res) => {
     try {
       const { username, password } = req.body;
@@ -212,6 +193,7 @@ router.put('/save-requirement/:id',verifytoken, (req, res) => {
   
   });
 
+  // Api for Faculty Signup
   router.post('/signup', async (req, res) => {
     try {
       const { facultyname, username, password } = req.body;
