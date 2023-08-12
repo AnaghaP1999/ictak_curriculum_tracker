@@ -13,6 +13,8 @@ export class AddresponseComponent implements OnInit {
 
   requirementData: any = {};
   private id: string | null = null;
+  comments:any;
+  curriculum:any;
 
   constructor(private reqservice:RequirementserviceService, private http: HttpClient, private route: ActivatedRoute,
     private router:Router) { }

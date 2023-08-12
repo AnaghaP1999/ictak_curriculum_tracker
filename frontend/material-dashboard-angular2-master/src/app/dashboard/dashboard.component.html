@@ -101,6 +101,12 @@
                                     <small class="text-danger" [class.d-none]="hours.valid || hours.touched">Total hours
                                         is required</small>
                                 </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="hours" class="form-label">File</label>
+                                    <input type="text" class="form-control" id="hours"
+                                        placeholder="Add some files" [(ngModel)]="requirementform.file"
+                                        #hours="ngModel" name="file">
+                                </div>
                                 <button type="submit" class="btn btn-primary"
                                     [disabled]="reqForm.form.invalid">Submit</button>
                             </form>

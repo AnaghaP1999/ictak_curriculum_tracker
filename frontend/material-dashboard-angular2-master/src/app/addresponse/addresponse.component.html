@@ -9,18 +9,21 @@
       
                     <!-- Modal body -->
                     <div class="modal-body">
-                      <form #add="ngForm" (ngSubmit)="addResponse()" enctype="multipart/form-data">
+                      <form #add="ngForm" (ngSubmit)="addResponse()">
                         <div class="mb-3 mt-3">
                           <label for="name" class="form-label">Comment</label>
                           <textarea class="form-control" id="comments" [(ngModel)]="requirementData.comments"
-                            placeholder="Add comments here" name="comments"></textarea>
+                            placeholder="Add comments here" name="comments" [class.is-invalid]="comments.invalid && comments.touched" required></textarea>
+                            <small class="text-danger" [class.d-none]="comments.valid || comments.touched">comment is required</small>
                         </div>
                         <div class="mb-3">
                           <label for="area" class="form-label">Upload Curriculum</label>
-                          <input type="text" class="form-control" id="curriculum" name="curriculum" [(ngModel)]="requirementData.curriculum" placeholder="Add the url"/>                        
+                          <input type="text" class="form-control" id="curriculum" name="curriculum" [(ngModel)]="requirementData.curriculum" placeholder="Add the url"
+                          [class.is-invalid]="curriculum.invalid && curriculum.touched" required/>      
+                          <small class="text-danger" [class.d-none]="curriculum.valid || curriculum.touched">this field is required</small>                  
                         </div>
                        
-                        <button  type="submit" class="btn btn-primary">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button  type="submit" class="btn btn-primary" [disabled]="add.form.invalid">Submit</button> &nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="submit" class="btn btn-danger" >Cancel</button>
                       </form>
                     </div>
