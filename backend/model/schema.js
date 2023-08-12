@@ -34,6 +34,9 @@ const Schema = mongoose.Schema({
     },
     user:{
         type:String,
+    },
+    file:{
+        type:String,
     }
 
 });

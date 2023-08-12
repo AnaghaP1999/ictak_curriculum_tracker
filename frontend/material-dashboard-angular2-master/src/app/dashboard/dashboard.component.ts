@@ -45,8 +45,8 @@ hours:'',
 approved:'0',
 comments: '',
 curriculum: '',
-user:''
-
+user:'',
+file:''
 }
   
   startAnimationForLineChart(chart){

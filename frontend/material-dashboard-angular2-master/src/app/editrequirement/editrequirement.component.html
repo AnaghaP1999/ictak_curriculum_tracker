@@ -52,12 +52,18 @@
                             placeholder="No: of hours of training" name="hours">
                         </div>
 
-                           <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3">
+                          <label for="hours" class="form-label">File</label>
+                          <input type="text" class="form-control" id="file" [(ngModel)]="requirementData.file"
+                            placeholder="Add some files" name="file">
+                        </div>
+
+                           <div class="mb-3 mt-3" *ngIf="(requirementData.comments != '')">
                           <label for="name" class="form-label">Comment</label>
                           <textarea class="form-control" id="comments" [(ngModel)]="requirementData.comments"
                             placeholder="Add comments here" name="comments"></textarea>
                         </div>
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3" *ngIf="(requirementData.curriculum != '')">
                           <label for="area" class="form-label">Upload Curriculum</label>
                           <input type="text" class="form-control" id="curriculum" name="curriculum"
                               [(ngModel)]="requirementData.curriculum" placeholder="Add the url"/>                        
