@@ -12,13 +12,13 @@
                       <form #add="ngForm" (ngSubmit)="addResponse()">
                         <div class="mb-3 mt-3">
                           <label for="name" class="form-label">Comment</label>
-                          <textarea class="form-control" id="comments" [(ngModel)]="requirementData.comments"
+                          <textarea class="form-control" id="comments" #comments="ngModel" [(ngModel)]="requirementData.comments"
                             placeholder="Add comments here" name="comments" [class.is-invalid]="comments.invalid && comments.touched" required></textarea>
                             <small class="text-danger" [class.d-none]="comments.valid || comments.touched">comment is required</small>
                         </div>
                         <div class="mb-3">
                           <label for="area" class="form-label">Upload Curriculum</label>
-                          <input type="text" class="form-control" id="curriculum" name="curriculum" [(ngModel)]="requirementData.curriculum" placeholder="Add the url"
+                          <input type="text" #curriculum="ngModel" class="form-control" id="curriculum" name="curriculum" [(ngModel)]="requirementData.curriculum" placeholder="Add the url"
                           [class.is-invalid]="curriculum.invalid && curriculum.touched" required/>      
                           <small class="text-danger" [class.d-none]="curriculum.valid || curriculum.touched">this field is required</small>                  
                         </div>
